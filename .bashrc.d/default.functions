@@ -1,0 +1,92 @@
+##################################################
+# get a list what cmds i called before           #
+##################################################
+function before( ){
+    if [ $# -gt 0 ] ; then
+	history | grep -i $1;
+    else
+	echo "Usage: before search"
+    fi
+}
+
+
+
+##################################################
+# quick way to do math  	   		             #
+##################################################
+function calc( ){
+    bc << EOF
+scale=4
+$@
+quit
+EOF
+}
+
+
+##################################################
+# Simple functions related to files              #
+##################################################
+
+
+function edit( ){ 
+    $EDITOR $1 
+}
+
+
+###################################################
+# Create a unique backup                          #
+###################################################
+function file_backup_uniq( ){
+     if [ $# -gt 0 ] ; then
+ 	local md5hash=`md5sum $1 | awk '{ print $1 }'`
+ 	local saveas="$1_$md5hash"
+ 	cp -f $1 $saveas
+     else
+ 	echo "Usage: uniq_backup FILE"
+     fi
+}
+
+
+###################################################
+# swap 2 filenames around                         #
+###################################################
+function file_swap( ){
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+
+###################################################
+# show the output of a file with no commments (#) #
+# it needs improvements to be better              #
+###################################################
+function file_nocommnets( ){
+    if [ $# -gt 0 ] ; then
+ 	grep -vE '^($|#)' $1
+    else
+ 	echo "Usage: nocommnets FILE"
+    fi
+}
+
+###################################################
+# Remove the # and ~ files                        #
+###################################################
+function file_remove_temp( ){
+	 find ./ \( -name '*~' -or  -name '*#*' \) -type f -exec rm -i {} \;
+}
+
+
+###################################################
+# set the term title tab or window
+###################################################
+function tabname {
+  printf "\e]1;$1\a"
+}
+
+function winname {
+  printf "\e]2;$1\a"
+}
+
+
+

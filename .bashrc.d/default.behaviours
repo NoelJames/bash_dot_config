@@ -1,0 +1,48 @@
+#################################################################################
+# Behavious (modify shell interaction)                                          #
+#################################################################################
+# set, shopt                                                                    #
+#################################################################################
+
+set -o emacs            # Use an emacs-style line editing interface
+set -o noclobber        # don't redirect > into an existing file
+
+shopt -s cdspell        # cd command will be corrected
+shopt -s cdable_vars    # not a dir then check variable value for dir
+shopt -s checkhash      # use hash table to speed up command finds
+shopt -s checkwinsize	# check term window after each command
+shopt -s cmdhist        # store mulit line cmd in one line
+shopt -s dotglob        # add dot files to tab key completion
+shopt -s extglob        # complex expressions for command line completion
+shopt -s hostcomplete	# complete /etc/hosts names in strings with an @ in them
+shopt -s no_empty_cmd_completion # dont (offer) list of all commands when i hit tab
+shopt -s histappend	# just append to bash history
+shopt -s histreedit histverify #show !cmd results insted of just exe them
+
+
+#################################################################################
+# History Settings                                                              #
+#################################################################################
+export HISTSIZE=2000 # keep 2000 cmds in history
+# ignore bg, fg, ls, exit, & duplicate entries
+export HISTIGNORE="&:ls:[bf]g:exit:history"
+
+
+#################################################################################
+# Command alias                                                                 #
+#################################################################################
+alias rm='rm -i'        # look over remove files
+alias cp='cp -i'        # ask when coping over other file
+alias mv='mv -i'        #
+
+
+
+##################################################
+# Export Paths                                   #
+##################################################
+# references to paths for cdable_vars
+export desktop=$HOME/Desktop
+export documents=$HOME/documents
+
+# always include home bin
+export PATH=$PATH:~/bin

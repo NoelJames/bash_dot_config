@@ -1,0 +1,26 @@
+## Backups Files and tmp files
+*.bak
+trash
+.#*
+#*
+*.*~
+*.pyc
+
+
+## OS generated crud
+.idea
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+
+## indexes and data files
+*.idx
+*.dat
+log/*
+!log/README.md
